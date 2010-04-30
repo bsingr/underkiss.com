@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>underKISS.com</title>
+<style type='text/css'>
+* { font-family: helvetica,arial,freesans,clean,sans-serif; color: #000;}
+h1, h2, h3 { text-transform: uppercase; margin: 0; }
+h1 { margin-bottom: .9em; color: #ccc; }
+h2 { margin-bottom: .2em; }
+h3 { margin-bottom: .1em; } 
+p { }
+a[href], a[href]:visited { font-weight: bold; color: #3399cc; text-decoration: none; }
+a[href]:hover { color: #333; }
+.nav { margin: 2% 4%; }
+.nav li { list-style-type: none; }
+.nav a, .nav a:visited { color: #999; text-decoration: none; }
+.nav a:hover { color: #666; }
+.content { margin: 2% 10%; max-width: 50%; }
+.content .footer { margin-top: 4em; font-size: 14px; color: #ccc; font-weight: bold; }
+/*app*/
+.col-greenle { color: #99cc33; }
+.col-blacki { color: #000; }
+.col-violetta { color: #9933cc; }
+.col-blueish { color: #3399cc; }
+</style>
+<script type='text/javascript' src='./vendor/jquery-1.4.1.min.js'></script>
+<script type='text/javascript' src='./vendor/sammy-0.5.2.min.js'></script>
+<script type='text/javascript'>
+var colorizing = false;
+var colorize = function(){
+	var $cols = $('.cols', $('.content'));
+	// remove
+	$('span', $cols).removeClass("col-greenle col-blacki col-violetta col-blueish");
+	// add
+	var random = function(){ return parseInt(Math.random()*4); };
+	var cols = ["col-greenle", "col-blacki","col-violetta", "col-blueish"];
+	var cells = [0,1,2,3];
+	while (cells.length) {
+		$('.col-'+cells.shift(), $cols).addClass(cols[random()]);
+	}
+	if (colorizing)
+		setTimeout("colorize()", 1000);
+};
+Sammy('body', function(){ with(this) {
+ 	bind('run', function(c){
+		var thisYear = (new Date()).getFullYear().toString();
+ 		$('.footer').html('COPYRIGHT 1998 - '+thisYear+' BY dpree');
+	});
+  get('#!:page', function(c) {
+		if (c.params.page == 'home') {
+			colorizing = true;
+			colorize();
+	  } else {
+			colorizing = false;
+		}
+    $(".page[name!=!"+c.params.page+"]").parent().hide();
+    $(".page[name=!"+c.params.page+"]").parent().show();
+  });
+}});
+$(document).ready(function(){
+  Sammy('body').run('#!home');
+});
+</script>
+</head>
+<body>
+  <div class='nav'>
+    <ul>
+      <li><a href='#!home'>home</a></li>
+      <li><a href='#!stack'>stack</a></li>
+      <li><a href='#!thanks'>thanks</a></li>
+    </ul>
+  </div>
+  <div class='content'>
+    <div>
+      <a name='!home' class='page'> </a>
+      <h2>you're down</h2>
+      <h1>under<span class='cols'><span class="col-0 col-greenle">K</span><span class="col-1 col-blacki">I</span><span class="col-2 col-violetta">S</span><span class="col-3 col-blueish">S</span></span>.com</h1>
+      <p></p>
+    </div>
+    <div>
+      <a name='!stack' class='page'> </a>
+      <h1>staging area</h1>
+      <ul>
+        <li>
+          <p><a href='https://www.ohloh.net/accounts/dpree/stacks'>ohloh.net</a></p>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <a name='!thanks' class='page'> </a>
+      <h1>blown kisses to</h1>
+      <ul>
+        <li>
+          <a href='http://www.github.com'>github.com</a>
+        </li>
+        <li>
+          <a href='http://www.sensible.com'>sensible.com</a>
+        </li>
+        <li>
+          <a href='http://www.ajaxian.com'>ajaxian.com</a>
+        </li>
+      </ul>
+    </div>
+    <p class='footer'></p>
+  </div>
+</body>
+</html>
