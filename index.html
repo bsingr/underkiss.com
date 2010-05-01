@@ -3,6 +3,9 @@
 <head>
 <title>underKISS.com</title>
 <style type='text/css'>
+html { background: #000;  }
+body { border-top: 20px solid #ddd; border-right: 20px solid #ddd; border-bottom: 20px solid #ddd; background: #fff; margin: 20px 80px 20px 0px; }
+.wrapper { border-top: 20px solid #fff; padding: 20px 20px 80px 20px; }
 * { font-family: helvetica,arial,freesans,clean,sans-serif; color: #333;}
 h1, h2, h3 { text-transform: uppercase; margin: 0; }
 h1 { margin-bottom: .9em; color: #ccc; }
@@ -15,7 +18,7 @@ a[href]:hover { color: #333; }
 .nav li { list-style-type: none; }
 .nav a, .nav a:visited { color: #999; text-decoration: none; }
 .nav a:hover { color: #666; }
-.content { margin: 2% 10%; max-width: 50%; }
+.content { margin: 2% 10%; }
 .content .footer { margin-top: 4em; font-size: 14px; color: #ccc; font-weight: bold; }
 /*app*/
 .col-greenle { color: #99cc33; }
@@ -27,8 +30,10 @@ a[href]:hover { color: #333; }
 <script type='text/javascript' src='./vendor/sammy-0.5.2.min.js'></script>
 <script type='text/javascript'>
 var colorizing = false;
-var colorize = function(){
-	var $cols = $('.cols', $('.content'));
+var colorize = function(setColorizing){
+	if (setColorizing)
+		colorizing = true;
+	var $cols = $('.underkiss-cols');
 	// remove
 	$('span', $cols).removeClass("col-greenle col-blacki col-violetta col-blueish");
 	// add
@@ -43,16 +48,11 @@ var colorize = function(){
 };
 Sammy('body', function(){ with(this) {
  	bind('run', function(c){
+	  colorize(true);
 		var thisYear = (new Date()).getFullYear().toString();
- 		$('.footer').html('COPYRIGHT 1998 - '+thisYear+' BY dpree');
+ 		$('.footer').html('COPYRIGHT 1998 - '+thisYear+' BY dpree +at+ underkiss.com');
 	});
   get('#!:page', function(c) {
-		if (c.params.page == 'home') {
-			colorizing = true;
-			colorize();
-	  } else {
-			colorizing = false;
-		}
     $(".page[name!=!"+c.params.page+"]").parent().hide();
     $(".page[name=!"+c.params.page+"]").parent().show();
   });
@@ -63,46 +63,73 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-  <a href="http://github.com/dpree"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  <div class='nav'>
-    <ul>
-      <li><a href='#!home'>home</a></li>
-      <li><a href='#!stack'>stack</a></li>
-      <li><a href='#!thanks'>thanks</a></li>
-    </ul>
-  </div>
-  <div class='content'>
-    <div>
-      <a name='!home' class='page'> </a>
-      <h2>you're down</h2>
-      <h1>under<span class='cols'><span class="col-0 col-greenle">K</span><span class="col-1 col-blacki">I</span><span class="col-2 col-violetta">S</span><span class="col-3 col-blueish">S</span></span>.com</h1>
-       <p>delivering code + design for future web apps</p>
-    </div>
-    <div>
-      <a name='!stack' class='page'> </a>
-      <h1>staging area</h1>
-      <ul>
-        <li>
-          <p><a href='https://www.ohloh.net/accounts/dpree/stacks'>ohloh.net</a></p>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <a name='!thanks' class='page'> </a>
-      <h1>blown kisses to</h1>
-      <ul>
-        <li>
-          <a href='http://www.github.com'>github.com</a>
-        </li>
-        <li>
-          <a href='http://www.sensible.com'>sensible.com</a>
-        </li>
-        <li>
-          <a href='http://www.ajaxian.com'>ajaxian.com</a>
-        </li>
-      </ul>
-    </div>
-    <p class='footer'></p>
+  <a href="http://github.com/dpree"><img style="position: absolute; top: 20px; right: 80px; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <div class='wrapper'>
+	  <div class='nav'>
+	    <ul>
+	      <li><a href='#!home'>home</a></li>
+	      <li><a href="#!sites">sites</a></li>
+	      <li><a href='#!stack'>stack</a></li>
+	      <li><a href='#!thanks'>thanks</a></li>
+	    </ul>
+	  </div>
+	  <div class='content'>
+	    <div>
+	      <a name='!home' class='page'> </a>
+	      <h2>you're down</h2>
+	      <h1>under<span class='underkiss-cols'><span class="col-0 col-greenle">K</span><span class="col-1 col-blacki">I</span><span class="col-2 col-violetta">S</span><span class="col-3 col-blueish">S</span></span>.com</h1>
+	       <p>delivering code + design for future web apps</p>
+	    </div>
+	    <div>
+	      <a name='!sites' class='page'> </a>
+	      <h1>code + design by under<span class='underkiss-cols'><span class="col-0 col-greenle">K</span><span class="col-1 col-blacki">I</span><span class="col-2 col-violetta">S</span><span class="col-3 col-blueish">S</span></span>.com</h1>
+	      <ul>
+	        <li>
+	          <p>
+			        <a href='http://www.hsb-normalien.de'>www.hsb-normalien.de</a><br/>
+			        rel. 2010, 2007, 2002
+		        </p>
+	        </li>
+					<li>
+	          <p>
+			        <a href='http://www.feuerwehr-schwaigern.de/pt3'>www.feuerwehr-schwaigern.de</a><br/>
+			        rel. 2010*, 2005, 2003
+		        </p>
+	        </li>
+					<li>
+	          <p>
+			        <a href='http://www.gc-hn.de/'>www.gc-hn.de</a><br/>
+			        rel. 2007, 2003, 2001, 1999, 1998
+		        </p>
+	        </li>
+	      </ul>
+	    </div>
+	    <div>
+	      <a name='!stack' class='page'> </a>
+	      <h1>staging area</h1>
+	      <ul>
+	        <li><a href='https://www.ohloh.net/accounts/dpree/stacks'>ohloh stack</a></li>
+	        <li><a href='https://www.github.com/dpree'>github profile</a></li>
+		      <li><a href='http://sourceforge.net/projects/phenotype/'>phenotype cms [contributor]</a></li>
+	      </ul>
+	    </div>
+	    <div>
+	      <a name='!thanks' class='page'> </a>
+	      <h1>blown kisses to</h1>
+	      <ul>
+	        <li>
+	          <a href='http://www.github.com'>github.com</a>
+	        </li>
+	        <li>
+	          <a href='http://www.sensible.com'>sensible.com</a>
+	        </li>
+	        <li>
+	          <a href='http://www.ajaxian.com'>ajaxian.com</a>
+	        </li>
+	      </ul>
+	    </div>
+	    <p class='footer'></p>
+	  </div>
   </div>
 </body>
 </html>
